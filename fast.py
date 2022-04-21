@@ -25,7 +25,7 @@ class UserSchema(BaseModel):
         orm_mode=True
 
 class UserCreateSchema(UserSchema):
-    password:str
+    pass
 
 @app.get('/status',response_model=List[UserCreateSchema])
 def get_users(db:Session=Depends(get_db)):
@@ -33,7 +33,7 @@ def get_users(db:Session=Depends(get_db)):
 
 @app.post('/status',response_model=UserSchema)
 def get_users(user:UserCreateSchema, db:Session=Depends(get_db)):
-    u=Users(name=user.name,co_ordinates=user.co_ordinates,password=user.password)
+    u=Users(name=user.name,co_ordinates=user.co_ordinates)
     db.add(u)
     db.commit()
     return u
